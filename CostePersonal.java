@@ -1,16 +1,24 @@
 public class CostePersonal {
- 
-	static float CosteDelPersonal(Trabajador trabajadores[]) {
-		float costeFinal = 0;
-		Trabajador trabajador;
-		for (int i = 0; i < trabajadores.length; i++) {
-			trabajador = trabajadores[i];
-			if (trabajador.getTipoTrabajador() == Trabajador.DIRECTOR || trabajador.getTipoTrabajador() == Trabajador.SUBDIRECTOR) {
-				costeFinal += trabajador.getNomina();
-			} else {
-				costeFinal += trabajador.getNomina() + (trabajador.getHorasExtras() * 20);
-			}
-		}
-		return costeFinal;
-	}
+
+    public static float calcularCosteDelPersonal(Trabajador[] trabajadores) {
+        if (trabajadores == null || trabajadores.length == 0) {
+            throw new IllegalArgumentException("No hay trabajadores");
+        }
+
+        float costeTotal = 0;
+
+        for (Trabajador trabajador : trabajadores) {
+            
+			float nomina = trabajador.getNomina();
+            float horasExtras = trabajador.getHorasExtras();
+
+            if  (trabajador.getTipoTrabajador() == Trabajador.DIRECTOR || trabajador.getTipoTrabajador() == Trabajador.SUBDIRECTOR) {
+                costeTotal += nomina;
+            } else {
+                costeTotal += nomina + (horasExtras * 20);
+            }
+        }
+
+        return costeTotal;
+    }
 }
